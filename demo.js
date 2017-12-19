@@ -66,6 +66,7 @@ function initPlayers() {
     // dp1
     window.dp1 = new DPlayer({
         container: document.getElementById('dplayer1'),
+        preload: 'none',
         video: {
             url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.mp4',
             pic: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.png',
@@ -83,6 +84,7 @@ function initPlayers() {
     // dp2
     window.dp2 = new DPlayer({
         container: document.getElementById('dplayer2'),
+        preload: 'none',
         autoplay: false,
         theme: '#FADFA3',
         loop: true,
@@ -151,6 +153,7 @@ function initPlayers() {
     //dp3
     window.dp3 = new DPlayer({
         container: document.getElementById('dplayer3'),
+        preload: 'none',
         video: {
             quality: [{
                 name: 'HD',
@@ -169,6 +172,7 @@ function initPlayers() {
     // dp4
     window.dp4 = new DPlayer({
         container: document.getElementById('dplayer4'),
+        preload: 'none',
         video: {
             url: 'https://moeplayer.b0.upaiyun.com/dplayer/hls/hikarunara.m3u8',
             type: 'hls'
@@ -178,6 +182,7 @@ function initPlayers() {
     // dp5
     window.dp5 = new DPlayer({
         container: document.getElementById('dplayer5'),
+        preload: 'none',
         video: {
             url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.flv',
             type: 'flv'
@@ -186,6 +191,7 @@ function initPlayers() {
 
     window.dp8 = new DPlayer({
         container: document.getElementById('dplayer8'),
+        preload: 'none',
         video: {
             url: 'https://moeplayer.b0.upaiyun.com/dplayer/dash/hikarunara.mpd',
             type: 'dash'
@@ -194,6 +200,7 @@ function initPlayers() {
 
     window.dp6 = new DPlayer({
         container: document.getElementById('dplayer6'),
+        preload: 'none',
         live: true,
         danmaku: true,
         apiBackend: {
