@@ -182,6 +182,10 @@ var dp = new DPlayer({
 
     Destroy player
 
++ `dp.speed(rate)`
+
+    Set video speed
+
 + `dp.video`
 
     Native video, most [native api](http://www.w3schools.com/tags/ref_av_dom.asp) are supported
@@ -206,7 +210,7 @@ var dp = new DPlayer({
 
  + `dp.danmaku.send({text, color, type})`
 
-    Submit a new danmaku to back end, the value of `color` should be like `#fff`, the value of `type` should be `top` `bottom` or `right`, notice: this danmaku will not be submit to back end
+    Submit a new danmaku to back end, the value of `color` should be like `#fff`, the value of `type` should be `top` `bottom` or `right`
 
  + `dp.danmaku.opacity(percentage)`
 
@@ -214,7 +218,7 @@ var dp = new DPlayer({
 
  + `dp.danmaku.draw({text, color, type})`
 
-    Draw a new danmaku in real time, this custom danmaku will not be saved to back-end
+    Draw a new danmaku to player in real time
 
  + `dp.danmaku.clear()`
 
@@ -231,6 +235,18 @@ var dp = new DPlayer({
  + `dp.danmaku.show()`
 
     Show danmaku
+
++ `dp.fullScreen`
+
+ Type should be `web` or `browser`, the default one is `browser`
+
+ + `dp.fullScreen.request(type)`
+
+   Request fullscreen
+
+ + `dp.fullScreen.cancel(type)`
+
+   Cancel fullscreen
 
 
 ### Event binding
