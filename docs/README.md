@@ -41,7 +41,7 @@ var dp = new DPlayer({
 
 Name|Default|Note
 ----|-------|----
-container | document.getElementsByClassName('dplayer')[0] | player container
+container | document.querySelector('.dplayer') | player container
 live | false | enable live mode, see [Live mode](http://dplayer.js.org/docs/#/?id=live-mode) for more details
 autoplay | false | not supported in mobile browsers
 theme | '#b7daff' | main color
@@ -54,11 +54,12 @@ volume | 0.7 | default volume, not work after user set volume themselves
 logo | undefined | logo in top left corner
 apiBackend | - | custom get and send danmaku behavior, see [Live mode](http://dplayer.js.org/docs/#/?id=live-mode) for more details
 video | undefined | video info
-video.quality | undefined | more: [Quality switching](http://dplayer.js.org/docs/#/?id=quality-switching)
+video.quality | undefined | [Quality switching](http://dplayer.js.org/docs/#/?id=quality-switching)
 video.url | undefined | video link
 video.pic | undefined | video poster
 video.thumbnails | undefined | video thumbnails, generate with [DPlayer-thumbnails](https://github.com/MoePlayer/DPlayer-thumbnails)
-video.type | 'auto' | 'flv' for flv format, 'hls' for m3u8 format, 'normal' for mp4 ogg and webm format, 'auto' for automatic detection according to video suffix, more: [HLS support](http://dplayer.js.org/docs/#/?id=hls-support) [FLV support](http://dplayer.js.org/docs/#/?id=flv-support)
+video.type | 'auto' | [HLS support](http://dplayer.js.org/docs/#/?id=hls-support) [FLV support](http://dplayer.js.org/docs/#/?id=flv-support) [MPEG DASH support](http://dplayer.js.org/docs/#/?id=mpeg-dash-support) [WebTorrent support](http://dplayer.js.org/docs/#/?id=webtorrent-support)
+video.customType | undefined | [HLS support](http://dplayer.js.org/docs/#/?id=hls-support) [FLV support](http://dplayer.js.org/docs/#/?id=flv-support) [MPEG DASH support](http://dplayer.js.org/docs/#/?id=mpeg-dash-support) [WebTorrent support](http://dplayer.js.org/docs/#/?id=webtorrent-support)
 icons | [options.js#L24](https://github.com/MoePlayer/DPlayer/blob/master/src/options.js#L24) | UI icons
 iconsColor | #ffffff | player icons color
 subtitle | undefined | external subtitle
@@ -68,7 +69,7 @@ subtitle.fontSize | '20px' | subtitle font size
 subtitle.bottom | '40px' | subtitle bottom space
 subtitle.color | '#fff' | subtitle color
 danmaku | undefined | showing danmaku
-danmaku.id | `required` | it must be unique, check if some id used in other player: `https://api.prprpr.me/dplayer/list`
+danmaku.id | `required` | it must be unique
 danmaku.api | `required` | see [Back-end](http://dplayer.js.org/docs/#/?id=back-end) for more details
 danmaku.token | undefined | back end verification
 danmaku.maximum | undefined | maximum quantity of danmaku
@@ -306,6 +307,8 @@ Player events
 
 ### Quality switching
 
+[Demo](http://dplayer.js.org/#quality-switching)
+
 Set `option.video.quality` instead of `option.video.url`
 
 ```js
@@ -327,99 +330,23 @@ var dp = new DPlayer({
 
 ### HLS support
 
-It requires the library [hls.js](https://github.com/dailymotion/hls.js) and it should be loaded before DPlayer.min.js.
-
-```HTML
-<link rel="stylesheet" href="DPlayer.min.css">
-<div id="dplayer"></div>
-<script src="hls.min.js"></script>
-<script src="DPlayer.min.js"></script>
-```
-
-```js
-var dp = new DPlayer({
-    container: document.getElementById('dplayer'),
-    video: {
-        url: 'demo.m3u8',
-        type: 'hls'
-    }
-});
-```
-
-```js
-// Another way, init HLS outside
-var dp = new DPlayer({
-    container: document.getElementById('dplayer')
-});
-var hls = new Hls();
-hls.loadSource('demo.m3u8');
-hls.attachMedia(dp.video);
-```
+[Demo](http://dplayer.js.org/#hls-support)
 
 ### MPEG DASH support
 
-It requires the library [dash.js](https://github.com/Dash-Industry-Forum/dash.js) and it should be loaded before DPlayer.min.js.
-
-```HTML
-<link rel="stylesheet" href="DPlayer.min.css">
-<div id="dplayer"></div>
-<script src="dash.min.js"></script>
-<script src="DPlayer.min.js"></script>
-```
-
-```js
-var dp = new DPlayer({
-    container: document.getElementById('dplayer'),
-    video: {
-        url: 'demo.mpd',
-        type: 'dash'
-    }
-});
-```
-
-```js
-// Another way, init MPEG DASH outside
-var dp = new DPlayer({
-    container: document.getElementById('dplayer')
-});
-dashjs.MediaPlayer().create().initialize(dp11.video, "demo.mpd", false);
-```
+[Demo](http://dplayer.js.org/#dash-support)
 
 ### FLV support
 
-It requires the library [flv.js](https://github.com/Bilibili/flv.js) and it should be loaded before DPlayer.min.js.
+[Demo](http://dplayer.js.org/#flv-support)
 
-```HTML
-<link rel="stylesheet" href="DPlayer.min.css">
-<div id="dplayer"></div>
-<script src="flv.min.js"></script>
-<script src="DPlayer.min.js"></script>
-```
+### WebTorrent support
 
-```js
-var dp = new DPlayer({
-    container: document.getElementById('dplayer'),
-    video: {
-        url: 'demo.flv',
-        type: 'flv'
-    }
-});
-```
-
-```js
-// Another way, init FLV outside
-var dp = new DPlayer({
-    container: document.getElementById('dplayer')
-});
-var flvPlayer = flvjs.createPlayer({
-    type: 'flv',
-    url: 'demo.flv'
-});
-flvPlayer.attachMediaElement(dp.video);
-flvPlayer.load();
-```
+[Demo](http://dplayer.js.org/#webtorrent-support)
 
 ### Live mode
+
+[Demo](http://dplayer.js.org/#live)
 
 At first, you should prepare a WebSocket backend.
 
@@ -482,7 +409,7 @@ https://github.com/DIYgod/DPlayer-data
 
 **Build yourself:**
 
-[DPlayer-backend](https://github.com/DIYgod/DPlayer-backend)
+[DPlayer-node](https://github.com/MoePlayer/DPlayer-node)
 
 ### Bilibili danmaku
 
@@ -490,15 +417,15 @@ https://github.com/DIYgod/DPlayer-data
 
 API:
 
-`https://api.prprpr.me/dplayer/bilibili?aid=【bilibili视频AV号】`
+`https://api.prprpr.me/dplayer/v2/bilibili?aid=【bilibili视频AV号】`
 
-or `https://api.prprpr.me/dplayer/bilibili?cid=【bilibili视频cid】`
+or `https://api.prprpr.me/dplayer/v2/bilibili?cid=【bilibili视频cid】`
 
 ```JS
 var option = {
     danmaku: {
         // ...
-        addition: ['https://api.prprpr.me/dplayer/bilibili?aid=【bilibili视频AV号】']
+        addition: ['https://api.prprpr.me/dplayer/v2/bilibili?aid=【bilibili视频AV号】']
     }
 }
 ```
