@@ -14,6 +14,8 @@ requestAnimationFrame(animate);
 // highlight.js
 hljs.initHighlightingOnLoad();
 
+dplayer1();
+
 $.ajax({
     url: 'https://data.jsdelivr.com/v1/package/npm/dplayer',
     type: 'get',
@@ -25,19 +27,6 @@ $.ajax({
                 html += '<option value="' + data.versions[i] + '">v' + data.versions[i] + '</option>';
             }
             $('.version-select').html(html);
-
-            var version = data.versions[0];
-            $('.dplayer-css').attr('href', 'https://cdn.jsdelivr.net/npm/dplayer@' + version + '/dist//DPlayer.min.css');
-
-            $.ajax({
-                url: 'https://cdn.jsdelivr.net/npm/dplayer@' + version + '/dist/DPlayer.min.js',
-                cache: true,
-                type: 'get',
-                dataType: 'script',
-                success() {
-                    initPlayers();
-                },
-            });
         }
     },
     error(e) {
@@ -57,16 +46,18 @@ $('.version-select').change(function () {
         dataType: 'script',
         success() {
             clearPlayers();
-            initPlayers();
+            dplayer1();
         },
     });
 });
 
-function initPlayers() {
-    // dp1
+$('.load').click(function () {
+    window[$(this).parent().attr('id')] && window[$(this).parent().attr('id')]();
+});
+
+function dplayer1 () {
     window.dp1 = new DPlayer({
         container: document.getElementById('dplayer1'),
-        preload: 'none',
         video: {
             url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.mp4',
             pic: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.png',
@@ -80,11 +71,11 @@ function initPlayers() {
             api: 'https://api.prprpr.me/dplayer/'
         }
     });
+}
 
-    // dp2
+function dplayer2 () {
     window.dp2 = new DPlayer({
         container: document.getElementById('dplayer2'),
-        preload: 'none',
         autoplay: false,
         theme: '#FADFA3',
         loop: true,
@@ -149,11 +140,11 @@ function initPlayers() {
             eventsEle.scrollTop = eventsEle.scrollHeight;
         })
     }
+}
 
-    //dp3
+function dplayer3 () {
     window.dp3 = new DPlayer({
         container: document.getElementById('dplayer3'),
-        preload: 'none',
         video: {
             quality: [{
                 name: 'HD',
@@ -168,39 +159,31 @@ function initPlayers() {
             pic: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.png'
         }
     });
+}
 
-    // dp4
+function dplayer4 () {
     window.dp4 = new DPlayer({
         container: document.getElementById('dplayer4'),
-        preload: 'none',
         video: {
             url: 'https://moeplayer.b0.upaiyun.com/dplayer/hls/hikarunara.m3u8',
             type: 'hls'
         }
     });
+}
 
-    // dp5
+function dplayer5 () {
     window.dp5 = new DPlayer({
         container: document.getElementById('dplayer5'),
-        preload: 'none',
         video: {
             url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.flv',
             type: 'flv'
         }
     });
+}
 
-    window.dp8 = new DPlayer({
-        container: document.getElementById('dplayer8'),
-        preload: 'none',
-        video: {
-            url: 'https://moeplayer.b0.upaiyun.com/dplayer/dash/hikarunara.mpd',
-            type: 'dash'
-        }
-    });
-
+function dplayer6 () {
     window.dp6 = new DPlayer({
         container: document.getElementById('dplayer6'),
-        preload: 'none',
         live: true,
         danmaku: true,
         apiBackend: {
@@ -220,10 +203,34 @@ function initPlayers() {
     });
 }
 
+function dplayer7 () {
+    window.dp7 = new DPlayer({
+        container: document.getElementById('dplayer7'),
+        video: {
+            url: 'https://moeplayer.b0.upaiyun.com/dplayer/dash/hikarunara.mpd',
+            type: 'dash'
+        }
+    });
+}
+
+function dplayer8 () {
+    window.dp8 = new DPlayer({
+        container: document.getElementById('dplayer8'),
+        video: {
+            url: 'magnet:?xt=urn:btih:08ada5a7a6183aae1e09d831df6748d566095a10&dn=Sintel&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&ws=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2F&xs=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2Fsintel.torrent',
+            type: 'webtorrent'
+        }
+    });
+}
+
 function clearPlayers() {
-    for (var i = 0; i < 6; i++) {
-        window['dp' + (i + 1)].pause();
-        document.getElementById('dplayer' + (i + 1)).innerHTML = '';
+    for (var i = 1; ; i++) {
+        if (window['dp' + (i + 1)]) {
+            window['dp' + (i + 1)].destroy();            
+        }
+        else {
+            break;
+        }
     }
 }
 
