@@ -58,6 +58,7 @@ $('.load').click(function () {
 function dplayer1 () {
     window.dp1 = new DPlayer({
         container: document.getElementById('dplayer1'),
+        screenshot: true,
         video: {
             url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.mp4',
             pic: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.png',
