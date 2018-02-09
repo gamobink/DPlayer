@@ -60,8 +60,6 @@ video.pic | undefined | video poster
 video.thumbnails | undefined | video thumbnails, generate with [DPlayer-thumbnails](https://github.com/MoePlayer/DPlayer-thumbnails)
 video.type | 'auto' | [HLS support](http://dplayer.js.org/docs/#/?id=hls-support) [FLV support](http://dplayer.js.org/docs/#/?id=flv-support) [MPEG DASH support](http://dplayer.js.org/docs/#/?id=mpeg-dash-support) [WebTorrent support](http://dplayer.js.org/docs/#/?id=webtorrent-support)
 video.customType | undefined | [HLS support](http://dplayer.js.org/docs/#/?id=hls-support) [FLV support](http://dplayer.js.org/docs/#/?id=flv-support) [MPEG DASH support](http://dplayer.js.org/docs/#/?id=mpeg-dash-support) [WebTorrent support](http://dplayer.js.org/docs/#/?id=webtorrent-support)
-icons | [options.js#L24](https://github.com/MoePlayer/DPlayer/blob/master/src/options.js#L24) | UI icons
-iconsColor | #ffffff | player icons color
 subtitle | undefined | external subtitle
 subtitle.url | `required` | subtitle url
 subtitle.type | 'webvtt' | values: 'webvtt', 'ass', but only webvtt is supported for now
@@ -75,7 +73,7 @@ danmaku.token | undefined | back end verification
 danmaku.maximum | undefined | maximum quantity of danmaku
 danmaku.addition | undefined | additional danmaku, see [Bilibili danmaku](http://dplayer.js.org/docs/#/?id=bilibili-danmaku-and-video-link) for more details
 danmaku.user | 'DIYgod' | user name
-danmaku.margin | undefined | keep some white space, prevent warding off subtitle
+danmaku.bottom | undefined | values like: '10px' '10%', keep some white space, prevent warding off subtitle
 danmaku.unlimited | false | unlimited amount and allow overlap
 contextmenu | [] | custom contextmenu
 mutex | true | pause other players when this player start play
@@ -115,22 +113,8 @@ var dp = new DPlayer({
         maximum: 1000,
         addition: ['https://api.prprpr.me/dplayer/bilibili?aid=4157142']
         user: 'DIYgod'
-        margin: {
-            bottom: '15%'
-        },
+        bottom: '15%'
         unlimited: true
-    },
-    icons: {
-        play: [
-            '0 0 24 24',
-            'M8 5v14l11-7z',
-            '24' // Icon size
-        ],
-        pause: [
-            '0 0 24 24',
-            'M6 19h4V5H6v14zm8-14v14h4V5h-4z',
-            '24' // Icon size
-        ]
     },
     contextmenu: [
         {
